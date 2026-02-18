@@ -54,10 +54,7 @@ Ejemplo:
 #include <string>
 std::string nombre = "Jose";
 ```
-
-Perfecto, profesor. Aquí le dejo una versión **corta, clara y amigable**, pero que explica correctamente el *narrowing* sin entrar en demasiado formalismo.
-
-Puede reemplazar su subsección por esta.
+---
 
 ---
 
