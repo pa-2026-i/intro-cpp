@@ -1,8 +1,8 @@
 # Guía breve de programación en C++
 
-*Prof. Jose Francisco Ruiz Muñoz*
-*Programación Avanzada 2026-I*
-*Universidad Nacional de Colombia - Sede de La Paz*
+*Prof. Jose Francisco Ruiz Muñoz*<br>
+*Programación Avanzada 2026-I*<br>
+*Universidad Nacional de Colombia - Sede de La Paz*<br>
 
 El lenguaje C++ extiende el lenguaje C incorporando abstracciones de alto nivel como programación orientada a objetos, genéricos (templates) y manejo más seguro de recursos. Es ampliamente utilizado en sistemas de alto rendimiento, videojuegos, simulación científica y software industrial.
 
@@ -449,3 +449,12 @@ El compilador evita conversiones peligrosas.
 
 ---
 
+---
+
+## TAREA
+
+La tarea de este tema se encuentra en el archivo [TAREA.md](TAREA.md).
+
+---
+
+**Este repositorio fue desarrollado con apoyo de inteligencia artificial. El contenido fue revisado, validado y editado cuidadosamente por el docente responsable.*
