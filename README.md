@@ -206,14 +206,32 @@ int suma(int a, int b) {
 
 C++ permite:
 
-* Sobrecarga de funciones
-* Parámetros por referencia
-* Valores por defecto
+**Sobrecarga de funciones** — varias funciones con el mismo nombre y distintos parámetros:
+
+```cpp
+int suma(int a, int b) { return a + b; }
+double suma(double a, double b) { return a + b; }
+// suma(1, 2) → 3  ;  suma(1.5, 2.5) → 4.0
+```
+
+**Parámetros por referencia** — el parámetro es un alias del argumento (se puede modificar el original):
 
 ```cpp
 void incrementar(int &x) {
     x++;
 }
+// int n = 5; incrementar(n);  → n vale 6
+```
+
+**Valores por defecto** — los últimos parámetros pueden tener un valor si no se pasan:
+
+```cpp
+void saludar(const std::string& nombre, int veces = 1) {
+    for (int i = 0; i < veces; i++)
+        std::cout << "Hola, " << nombre << "\n";
+}
+// saludar("Ana");     → imprime una vez
+// saludar("Ana", 3); → imprime tres veces
 ```
 
 ## 4.1 Paso por valor vs paso por referencia
@@ -288,14 +306,27 @@ int* p = new int(5);
 delete p;
 ```
 
-En C++ moderno se recomienda usar **RAII** y punteros inteligentes:
+En C++ moderno se recomienda usar **RAII** (Resource Acquisition Is Initialization) y punteros inteligentes:
+
+- **RAII**: el recurso (memoria) se adquiere al crear el objeto y se libera automáticamente cuando el objeto sale de alcance. No hace falta llamar a `delete` a mano.
+- **Punteros inteligentes**: `std::unique_ptr` es dueño exclusivo del objeto; cuando el puntero se destruye, libera la memoria.
 
 ```cpp
 #include <memory>
 std::unique_ptr<int> p = std::make_unique<int>(5);
+// Al salir del bloque, p se destruye y la memoria se libera sola
 ```
 
-Esto evita fugas de memoria.
+**Salir del bloque** significa que la ejecución abandona el trozo de código entre llaves `{ }`. En ese momento las variables declaradas dentro se destruyen. Un bloque es todo lo que está entre una `{` y su `}` (el cuerpo de una función, un `if`, un `for`, o unas llaves puestas solo para limitar alcance). Ejemplo:
+
+```cpp
+{
+    std::unique_ptr<int> p = std::make_unique<int>(5);
+    // aquí p existe
+}   // al llegar aquí, p se destruye y se libera la memoria
+```
+
+Así se evitan fugas de memoria (olvidar `delete`) y dobles liberaciones.
 
 ---
 
@@ -347,6 +378,14 @@ template <typename T>
 T suma(T a, T b) {
     return a + b;
 }
+```
+
+Uso con distintos tipos (el compilador genera la versión adecuada en cada caso):
+
+```cpp
+suma(3, 5);        // int → 8
+suma(2.5, 1.5);    // double → 4.0
+suma(1.0f, 2.0f); // float → 3.0f
 ```
 
 Permite escribir código independiente del tipo.
